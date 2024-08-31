@@ -1,49 +1,49 @@
 var em=document.getElementById("em")
 var err1=document.getElementById("err1")
-var phone=document.getElementById("phone")
 var pwd=document.getElementById("pwd")
 
-
-function emailvalidate(){
-    let regEx = /^([a-zA-Z0-9.-]+)@([a-zA-Z0-9\-]+)\.([a-zA-Z]{2,3})(\.[a-zA-Z]{2,3})?$/     //^ carret symbol + USED BECAUSE IT CAN BE REPEATED {2,3} min 2 and max 3 chars
-    if (regEx.test(em.value)){
+function emailvalidate() {
+    let regEx = /^([a-zA-Z0-9._-]+)@([a-zA-Z0-9-]+)\.([a-zA-Z]{2,3})(\.[a-zA-Z]{2,3})?$/;
+    if (regEx.test(em.value)) {
         err1.innerText = "";
         return true;
-    }
-
-    else{
-        err1.innerText = "Invalid username"
+    } 
+    else {
+        err1.textContent = "Invalid email address";
+        err1.className = "error";
         return false;
     }
 }
 
-        function passvalidate() {
-            var password = document.getElementById("pwd").value;
-            var passwordStrength = document.getElementById("passwordStrength");
-        
-            // Regular expression for validating password
-            var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-        
-            }if (password.length >= 8) {
-                if (!regex.test(password)) {
-                    passwordStrength.textContent = "invalid password";
-                    passwordStrength.className = "error";
-                    return false;
-                }
-        
-            return true;
-        }
+// Password validation function
+function passvalidate() {
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
+    if (pwd.value.length === 0) {
+        passwordStrength.textContent = "Password field is empty";
+        passwordStrength.className = "error";
+        return false;
+    } else if (!regex.test(pwd.value)) {
+        passwordStrength.textContent = "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one number";
+        passwordStrength.className = "error";
+        return false;
+    } else {
+        passwordStrength.textContent = "";
+        return true;
+    }
+}
 
-        function notempty() {
-            if (em.value.trim() === "") {
-                alert("Email field is empty");
-                return false;
-            }
-        
-            if (pwd.value.trim() === "") {
-                alert("Password field is empty");
-                return false;
-            }
-        
-        }
+// Function to check if fields are not empty
+function notempty() {
+    if (em.value.trim() === "") {
+        alert("Email field is empty");
+        return false;
+    }
+
+    if (pwd.value.trim() === "") {
+        alert("Password field is empty");
+        return false;
+    }
+
+    return true;
+}
